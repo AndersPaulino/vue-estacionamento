@@ -7,7 +7,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import moment from 'moment';
+import moment, { Duration } from 'moment';
+import { Decimal } from 'decimal.js';
 
 class Condutor {
   id: number;
@@ -95,17 +96,19 @@ class Tipo {
 }
 
 class Configuracao {
-  private valorMinutoMulta: number;
-  private inicioExpediente: Date;
-  private fimExpediente: Date;
-  private tempoParaDesconto: Date;
-  private tempoDeDesconto: Date;
-  private gerarDesconto: boolean;
-  private vagasMoto: number;
-  private vagasCarro: number;
-  private vagasVan: number;
+  id: number;
+  valorMinutoMulta: number;
+  inicioExpediente: Date;
+  fimExpediente: Date;
+  tempoParaDesconto: Date;
+  tempoDeDesconto: Date;
+  gerarDesconto: boolean;
+  vagasMoto: number;
+  vagasCarro: number;
+  vagasVan: number;
 
   constructor(
+    id: number,
     valorMinutoMulta: number,
     inicioExpediente: Date,
     fimExpediente: Date,
@@ -116,6 +119,7 @@ class Configuracao {
     vagasCarro: number,
     vagasVan: number
   ) {
+    this.id = id;
     this.valorMinutoMulta = valorMinutoMulta;
     this.inicioExpediente = inicioExpediente;
     this.fimExpediente = fimExpediente;
@@ -126,7 +130,50 @@ class Configuracao {
     this.vagasCarro = vagasCarro;
     this.vagasVan = vagasVan;
   }
-}  
+}
+
+class Movimentacao {
+  id: number;
+  condutorId: number;
+  veiculoId: number;
+  dataEntrada: moment.Moment;
+  dataSaida: moment.Moment;
+  tempo: Duration;
+  tempoDesconto: Duration;
+  valorDesconto: Decimal;
+  valorHora: Decimal;
+  valorTotal: Decimal;
+  valorMulta: Decimal;
+  valorHoraMulta: Decimal;
+
+  constructor(
+    id: number,
+    condutorId: number,
+    veiculoId: number,
+    dataEntrada: moment.Moment,
+    dataSaida: moment.Moment,
+    tempo: Duration,
+    tempoDesconto: Duration,
+    valorDesconto: Decimal,
+    valorHora: Decimal,
+    valorTotal: Decimal,
+    valorMulta: Decimal,
+    valorHoraMulta: Decimal
+  ) {
+    this.id = id;
+    this.condutorId = condutorId;
+    this.veiculoId = veiculoId;
+    this.dataEntrada = dataEntrada;
+    this.dataSaida = dataSaida;
+    this.tempo = tempo;
+    this.tempoDesconto = tempoDesconto;
+    this.valorDesconto = valorDesconto;
+    this.valorHora = valorHora;
+    this.valorTotal = valorTotal;
+    this.valorMulta = valorMulta;
+    this.valorHoraMulta = valorHoraMulta;
+  }
+}
 
 @Component
 export default class Estacionamento extends Vue {
