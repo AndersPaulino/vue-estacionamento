@@ -42,6 +42,17 @@ class Marca {
   }
 }
 
+class Modelo {
+  nomeModelo: string;
+  marcaId: number;
+
+  constructor(nomeModelo: string, marcaId: number) {
+    this.nomeModelo = nomeModelo;
+    this.marcaId = marcaId;
+  }
+}
+
+
 @Component
 export default class Estacionamento extends Vue {
   mounted() {
