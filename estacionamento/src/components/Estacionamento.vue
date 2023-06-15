@@ -52,6 +52,22 @@ class Modelo {
   }
 }
 
+class Veiculo {
+  placa: string;
+  modeloId: number;
+  corId: number;
+  tipoId: number;
+  anoModelo: number;
+
+  constructor(placa: string, modeloId: number, corId: number, tipoId: number, anoModelo: number) {
+    this.placa = placa;
+    this.modeloId = modeloId;
+    this.corId = corId;
+    this.tipoId = tipoId;
+    this.anoModelo = anoModelo;
+  }
+}
+
 
 @Component
 export default class Estacionamento extends Vue {
