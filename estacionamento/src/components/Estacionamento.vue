@@ -34,6 +34,14 @@ class Condutor {
   }
 }
 
+class Marca {
+  nome: string;
+
+  constructor(nome: string) {
+    this.nome = nome;
+  }
+}
+
 @Component
 export default class Estacionamento extends Vue {
   mounted() {
