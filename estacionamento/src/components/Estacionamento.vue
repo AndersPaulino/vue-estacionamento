@@ -94,6 +94,40 @@ class Tipo {
   }
 }
 
+class Configuracao {
+  private valorMinutoMulta: number;
+  private inicioExpediente: Date;
+  private fimExpediente: Date;
+  private tempoParaDesconto: Date;
+  private tempoDeDesconto: Date;
+  private gerarDesconto: boolean;
+  private vagasMoto: number;
+  private vagasCarro: number;
+  private vagasVan: number;
+
+  constructor(
+    valorMinutoMulta: number,
+    inicioExpediente: Date,
+    fimExpediente: Date,
+    tempoParaDesconto: Date,
+    tempoDeDesconto: Date,
+    gerarDesconto: boolean,
+    vagasMoto: number,
+    vagasCarro: number,
+    vagasVan: number
+  ) {
+    this.valorMinutoMulta = valorMinutoMulta;
+    this.inicioExpediente = inicioExpediente;
+    this.fimExpediente = fimExpediente;
+    this.tempoParaDesconto = tempoParaDesconto;
+    this.tempoDeDesconto = tempoDeDesconto;
+    this.gerarDesconto = gerarDesconto;
+    this.vagasMoto = vagasMoto;
+    this.vagasCarro = vagasCarro;
+    this.vagasVan = vagasVan;
+  }
+}  
+
 @Component
 export default class Estacionamento extends Vue {
   mounted() {
