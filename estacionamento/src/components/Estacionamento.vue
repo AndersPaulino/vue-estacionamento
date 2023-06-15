@@ -35,36 +35,52 @@ class Condutor {
 }
 
 class Marca {
+  id: number;
   nome: string;
 
-  constructor(nome: string) {
+  constructor(id: number, nome: string) {
+    this.id = id;
     this.nome = nome;
   }
 }
 
 class Modelo {
+  id: number;
   nomeModelo: string;
   marcaId: number;
 
-  constructor(nomeModelo: string, marcaId: number) {
+  constructor(id: number, nomeModelo: string, marcaId: number) {
+    this.id = id;
     this.nomeModelo = nomeModelo;
     this.marcaId = marcaId;
   }
 }
 
 class Veiculo {
+  id: number;
   placa: string;
   modeloId: number;
   corId: number;
   tipoId: number;
   anoModelo: number;
 
-  constructor(placa: string, modeloId: number, corId: number, tipoId: number, anoModelo: number) {
+  constructor(id: number, placa: string, modeloId: number, corId: number, tipoId: number, anoModelo: number) {
+    this.id = id;
     this.placa = placa;
     this.modeloId = modeloId;
     this.corId = corId;
     this.tipoId = tipoId;
     this.anoModelo = anoModelo;
+  }
+}
+
+class Cor {
+  id: number;
+  nomeCor: string;
+
+  constructor(id: number, nomeCor: string) {
+    this.id = id;
+    this.nomeCor = nomeCor;
   }
 }
 
