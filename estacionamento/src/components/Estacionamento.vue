@@ -84,6 +84,15 @@ class Cor {
   }
 }
 
+class Tipo {
+  id: number;
+  nomeTipo: string;
+
+  constructor(id: number, nomeTipo: string){
+    this.id = id;
+    this.nomeTipo = nomeTipo;
+  }
+}
 
 @Component
 export default class Estacionamento extends Vue {
