@@ -9,6 +9,8 @@
 import { Component, Vue } from 'vue-property-decorator';
 import moment, { Duration } from 'moment';
 import { Decimal } from 'decimal.js';
+import axios, { AxiosResponse } from 'axios';
+
 
 class Condutor {
   id: number;
@@ -175,8 +177,62 @@ class Movimentacao {
   }
 }
 
+class MyApiClient {
+  private baseUrl: string;
+
+  constructor(baseUrl: string) {
+    this.baseUrl = baseUrl;
+  }
+
+  public async fetchData(): Promise<any> {
+    try {
+      const response: AxiosResponse = await axios.get(`${this.baseUrl}/data`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      throw error;
+    }
+  }
+
+  public async sendData(payload: any): Promise<void> {
+    try {
+      await axios.post(`${this.baseUrl}/data`, payload);
+      console.log('Data sent successfully');
+    } catch (error) {
+      console.error('Error sending data:', error);
+      throw error;
+    }
+  }
+}
+
+
+
 @Component
 export default class Estacionamento extends Vue {
+  private apiClient!: MyApiClient;
+
+  created() {
+    this.apiClient = new MyApiClient('https://estacionamento.uniamerica.com.br');
+  }
+
+  async fetchDataFromServer() {
+    try {
+      const data = await this.apiClient.fetchData();
+      console.log('Received data:', data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+
+  async sendDataToServer() {
+    try {
+      const payload = { name: 'John', age: 25 };
+      await this.apiClient.sendData(payload);
+    } catch (error) {
+      console.error('Error sending data:', error);
+    }
+  }
+
   mounted() {
     const tempoPago = moment('2023-06-15T10:30:00');
     const tempoDesconto = moment();
