@@ -1,7 +1,42 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <div id="condutorInfo"></div>
+    <header>
+      <div class="logo">
+        <h1 class="main-text">PS Express</h1>
+        <h2 class="sub-text">ParkingSmart<br>Express</h2>
+      </div>
+      <button class="condutor">
+        Condutor
+      </button>
+      <button class="veiculo">
+        Veiculo
+      </button>
+      <button class="movimentacao">
+        Movimentacao
+      </button>
+      <button class="configuracao">
+        Configuracao
+      </button>
+    </header>
+    <nav></nav>
+    <aside></aside>
+    <main>
+      <article>
+        <h1>Teste</h1>
+        <p>
+          HelloWorld!<br>
+          HelloWorld!<br>
+          HelloWorld!<br>
+          HelloWorld!<br>
+          HelloWorld!<br>
+          HelloWorld!<br>
+        </p>
+        <div id="condutorInfo"></div>
+        <button @click="getData">Obter Dados</button>
+      </article>
+      <section></section>
+    </main>
+    <footer></footer>
   </div>
 </template>
 
@@ -10,6 +45,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import moment, { Duration } from 'moment';
 import { Decimal } from 'decimal.js';
 import axios, { AxiosResponse } from 'axios';
+import api from './Api';
 
 
 class Condutor {
@@ -177,59 +213,23 @@ class Movimentacao {
   }
 }
 
-class MyApiClient {
-  private baseUrl: string;
 
-  constructor(baseUrl: string) {
-    this.baseUrl = baseUrl;
-  }
-
-  public async fetchData(): Promise<any> {
-    try {
-      const response: AxiosResponse = await axios.get(`${this.baseUrl}/data`);
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      throw error;
-    }
-  }
-
-  public async sendData(payload: any): Promise<void> {
-    try {
-      await axios.post(`${this.baseUrl}/data`, payload);
-      console.log('Data sent successfully');
-    } catch (error) {
-      console.error('Error sending data:', error);
-      throw error;
-    }
-  }
+interface Item {
+  id: number;
+  name: string;
 }
-
-
 
 @Component
 export default class Estacionamento extends Vue {
-  private apiClient!: MyApiClient;
+  items: Item[] = [];
 
-  created() {
-    this.apiClient = new MyApiClient('https://estacionamento.uniamerica.com.br');
-  }
-
-  async fetchDataFromServer() {
+  async getData() {
     try {
-      const data = await this.apiClient.fetchData();
-      console.log('Received data:', data);
+      const response: AxiosResponse<Item[]> = await axios.get('http://localhost:8080'); // Substitua pelo endpoint correto da sua API Java
+      this.items = response.data;
+      console.log('Dados recebidos:', this.items); // Exibe os dados no console para verificar se foram recebidos corretamente
     } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  }
-
-  async sendDataToServer() {
-    try {
-      const payload = { name: 'John', age: 25 };
-      await this.apiClient.sendData(payload);
-    } catch (error) {
-      console.error('Error sending data:', error);
+      console.error('Erro ao obter os dados:', error);
     }
   }
 
@@ -280,6 +280,76 @@ export default class Estacionamento extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: #F5F5F5;
+  width: 100%;
+  height: 7%;
+}
+header button {
+  margin-top: 15px;
+  font-size: 16px;
+  border-style: solid;
+  border-width: 2px;
+  height: 40px;
+  width: 130px;
+  border-radius: 7px;
+  margin: 5px;
+  background-color: #FFFFFF;
+  border-color: #30A2FF;
+  color: #30A2FF;
+}
+header button:hover{
+  background-color: #30A2FF;
+  color: #FFFFFF;
+}
+header button:active{
+  background-color: grey;
+  border-color: grey;
+}
+.logo {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.main-text {
+  position:absolute;
+  font-size: 36px;
+  font-weight: bold;
+  position: relative;
+  z-index: 2;
+  transition: opacity 0.3s;
+  opacity: 1;
+}
+
+.sub-text {
+  font-size: 18px;
+  color: #888;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 0.3s;
+}
+
+.logo:hover .main-text {
+  opacity: 0;
+}
+
+.logo:hover .sub-text {
+  opacity: 1;
+}
+
+
 h3 {
   margin: 40px 0 0;
 }
