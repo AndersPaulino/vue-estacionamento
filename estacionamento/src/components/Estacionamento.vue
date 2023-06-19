@@ -22,17 +22,7 @@
     <aside></aside>
     <main>
       <article>
-        <h1>Teste</h1>
-        <p>
-          HelloWorld!<br>
-          HelloWorld!<br>
-          HelloWorld!<br>
-          HelloWorld!<br>
-          HelloWorld!<br>
-          HelloWorld!<br>
-        </p>
-        <div id="condutorInfo"></div>
-        <button @click="getData">Obter Dados</button>
+        
       </article>
       <section></section>
     </main>
@@ -280,6 +270,12 @@ export default class Estacionamento extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+*{  
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
 header{
   display: flex;
   justify-content: center;
@@ -313,53 +309,56 @@ header button:active{
   border-color: grey;
 }
 .logo {
-  text-align: center;
-  margin-top: 50px;
-}
-
-.main-text {
-  position:absolute;
-  font-size: 36px;
-  font-weight: bold;
   position: relative;
-  z-index: 2;
-  transition: opacity 0.3s;
-  opacity: 1;
+  text-align: center;
+  padding-right: 100px;
+  width: 300px;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .sub-text {
-  font-size: 18px;
-  color: #888;
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
+  top: -10px;
+  left: 25px;
   opacity: 0;
-  z-index: 1;
-  transition: opacity 0.3s;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.logo .main-text {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
 }
 
 .logo:hover .main-text {
   opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .logo:hover .sub-text {
+  position: absolute;
+  top: -10px;
+  color: #42b983;
   opacity: 1;
 }
 
+.menu {
+  display: flex;
+}
 
-h3 {
-  margin: 40px 0 0;
+input[type="radio"] {
+  display: none;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
+
+label {
   display: inline-block;
-  margin: 0 10px;
+  padding: 10px 20px;
+  background-color: #eee;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+label:hover {
+  background-color: #ddd;
 }
 #condutorInfo{
   color: #42b983;
