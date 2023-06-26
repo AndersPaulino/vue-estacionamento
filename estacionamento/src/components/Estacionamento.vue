@@ -19,11 +19,10 @@
       </button>
     </header>
     <nav></nav>
-    <aside></aside>
+    <aside>
+    </aside>
     <main>
-      <article>
-        
-      </article>
+      <article></article>
       <section></section>
     </main>
     <footer></footer>
@@ -38,171 +37,16 @@ import axios, { AxiosResponse } from 'axios';
 import api from './Api';
 
 
-class Condutor {
+
+
+interface Condutor {
   id: number;
   nomeCondutor: string;
   cpf: string;
   telefone: string;
   tempoDesconto: moment.Moment;
   tempoPago: moment.Moment;
-
-  constructor(
-    id: number,
-    nomeCondutor: string,
-    cpf: string,
-    telefone: string,
-    tempoDesconto: moment.Moment,
-    tempoPago: moment.Moment
-  ) {
-    this.id = id;
-    this.nomeCondutor = nomeCondutor;
-    this.cpf = cpf;
-    this.telefone = telefone;
-    this.tempoDesconto = tempoDesconto;
-    this.tempoPago = tempoPago;
-  }
 }
-
-class Marca {
-  id: number;
-  nome: string;
-
-  constructor(id: number, nome: string) {
-    this.id = id;
-    this.nome = nome;
-  }
-}
-
-class Modelo {
-  id: number;
-  nomeModelo: string;
-  marcaId: number;
-
-  constructor(id: number, nomeModelo: string, marcaId: number) {
-    this.id = id;
-    this.nomeModelo = nomeModelo;
-    this.marcaId = marcaId;
-  }
-}
-
-class Veiculo {
-  id: number;
-  placa: string;
-  modeloId: number;
-  corId: number;
-  tipoId: number;
-  anoModelo: number;
-
-  constructor(id: number, placa: string, modeloId: number, corId: number, tipoId: number, anoModelo: number) {
-    this.id = id;
-    this.placa = placa;
-    this.modeloId = modeloId;
-    this.corId = corId;
-    this.tipoId = tipoId;
-    this.anoModelo = anoModelo;
-  }
-}
-
-class Cor {
-  id: number;
-  nomeCor: string;
-
-  constructor(id: number, nomeCor: string) {
-    this.id = id;
-    this.nomeCor = nomeCor;
-  }
-}
-
-class Tipo {
-  id: number;
-  nomeTipo: string;
-
-  constructor(id: number, nomeTipo: string){
-    this.id = id;
-    this.nomeTipo = nomeTipo;
-  }
-}
-
-class Configuracao {
-  id: number;
-  valorMinutoMulta: number;
-  inicioExpediente: Date;
-  fimExpediente: Date;
-  tempoParaDesconto: Date;
-  tempoDeDesconto: Date;
-  gerarDesconto: boolean;
-  vagasMoto: number;
-  vagasCarro: number;
-  vagasVan: number;
-
-  constructor(
-    id: number,
-    valorMinutoMulta: number,
-    inicioExpediente: Date,
-    fimExpediente: Date,
-    tempoParaDesconto: Date,
-    tempoDeDesconto: Date,
-    gerarDesconto: boolean,
-    vagasMoto: number,
-    vagasCarro: number,
-    vagasVan: number
-  ) {
-    this.id = id;
-    this.valorMinutoMulta = valorMinutoMulta;
-    this.inicioExpediente = inicioExpediente;
-    this.fimExpediente = fimExpediente;
-    this.tempoParaDesconto = tempoParaDesconto;
-    this.tempoDeDesconto = tempoDeDesconto;
-    this.gerarDesconto = gerarDesconto;
-    this.vagasMoto = vagasMoto;
-    this.vagasCarro = vagasCarro;
-    this.vagasVan = vagasVan;
-  }
-}
-
-class Movimentacao {
-  id: number;
-  condutorId: number;
-  veiculoId: number;
-  dataEntrada: moment.Moment;
-  dataSaida: moment.Moment;
-  tempo: Duration;
-  tempoDesconto: Duration;
-  valorDesconto: Decimal;
-  valorHora: Decimal;
-  valorTotal: Decimal;
-  valorMulta: Decimal;
-  valorHoraMulta: Decimal;
-
-  constructor(
-    id: number,
-    condutorId: number,
-    veiculoId: number,
-    dataEntrada: moment.Moment,
-    dataSaida: moment.Moment,
-    tempo: Duration,
-    tempoDesconto: Duration,
-    valorDesconto: Decimal,
-    valorHora: Decimal,
-    valorTotal: Decimal,
-    valorMulta: Decimal,
-    valorHoraMulta: Decimal
-  ) {
-    this.id = id;
-    this.condutorId = condutorId;
-    this.veiculoId = veiculoId;
-    this.dataEntrada = dataEntrada;
-    this.dataSaida = dataSaida;
-    this.tempo = tempo;
-    this.tempoDesconto = tempoDesconto;
-    this.valorDesconto = valorDesconto;
-    this.valorHora = valorHora;
-    this.valorTotal = valorTotal;
-    this.valorMulta = valorMulta;
-    this.valorHoraMulta = valorHoraMulta;
-  }
-}
-
 
 interface Item {
   id: number;
@@ -223,45 +67,45 @@ export default class Estacionamento extends Vue {
     }
   }
 
+
   mounted() {
     const tempoPago = moment('2023-06-15T10:30:00');
     const tempoDesconto = moment();
 
-    const condutor = new Condutor(
-      1,
-      'Alex',
-      '106003004750',
-      '45 222522540',
+    const condutor: Condutor = {
+      id: 1,
+      nomeCondutor: 'Alex',
+      cpf: '106003004750',
+      telefone: '45 222522540',
       tempoDesconto,
       tempoPago
-    );
+    };
 
     const condutorInfoElement = document.getElementById('condutorInfo');
 
-    const idElement = document.createElement('p');
-    idElement.innerText = `ID: ${condutor.id}`;
-
-    const nomeElement = document.createElement('p');
-    nomeElement.innerText = `Nome: ${condutor.nomeCondutor}`;
-
-    const cpfElement = document.createElement('p');
-    cpfElement.innerText = `CPF: ${condutor.cpf}`;
-
-    const telefoneElement = document.createElement('p');
-    telefoneElement.innerText = `Telefone: ${condutor.telefone}`;
-
-    const tempoDescontoElement = document.createElement('p');
-    tempoDescontoElement.innerText = `Tempo de Desconto: ${condutor.tempoDesconto}`;
-
-    const tempoPagoElement = document.createElement('p');
-    tempoPagoElement.innerText = `Tempo Pago: ${condutor.tempoPago}`;
-
     if (condutorInfoElement) {
+      const idElement = document.createElement('p');
+      idElement.innerText = `ID: ${condutor.id}`;
       condutorInfoElement.appendChild(idElement);
+
+      const nomeElement = document.createElement('p');
+      nomeElement.innerText = `Nome: ${condutor.nomeCondutor}`;
       condutorInfoElement.appendChild(nomeElement);
+
+      const cpfElement = document.createElement('p');
+      cpfElement.innerText = `CPF: ${condutor.cpf}`;
       condutorInfoElement.appendChild(cpfElement);
+
+      const telefoneElement = document.createElement('p');
+      telefoneElement.innerText = `Telefone: ${condutor.telefone}`;
       condutorInfoElement.appendChild(telefoneElement);
+
+      const tempoDescontoElement = document.createElement('p');
+      tempoDescontoElement.innerText = `Tempo de Desconto: ${condutor.tempoDesconto.toString()}`;
       condutorInfoElement.appendChild(tempoDescontoElement);
+
+      const tempoPagoElement = document.createElement('p');
+      tempoPagoElement.innerText = `Tempo Pago: ${condutor.tempoPago.toString()}`;
       condutorInfoElement.appendChild(tempoPagoElement);
     }
   }
@@ -362,5 +206,41 @@ label:hover {
 }
 #condutorInfo{
   color: #42b983;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #f1f1f1;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.sidebar-header {
+  margin-bottom: 20px;
+}
+
+.sidebar-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.sidebar-content ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-content li {
+  margin-bottom: 10px;
+}
+
+.sidebar-content a {
+  text-decoration: none;
+  color: #333;
+}
+
+.sidebar-content a:hover {
+  color: #000;
 }
 </style>
